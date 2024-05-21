@@ -1,0 +1,5 @@
+### IntelliJ IDEA ###
+.idea
+
+# Ignore environment variable files
+.env
