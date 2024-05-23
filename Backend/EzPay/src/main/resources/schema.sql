@@ -7,5 +7,7 @@ CREATE TABLE IF NOT EXISTS users (
      phone_number VARCHAR(20) NOT NULL,
      dni VARCHAR(20) NOT NULL,
      birth_date DATE,
-     gender VARCHAR(17)
+     gender VARCHAR(17),
+     created_At DATE,
+     role VARCHAR(5)
 );

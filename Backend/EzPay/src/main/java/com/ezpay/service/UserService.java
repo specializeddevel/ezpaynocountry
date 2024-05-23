@@ -17,4 +17,5 @@ public class UserService {
     public List<User> findAllUsers(){return userRepository.findAll();}
     public Optional<User> findUserById(Integer userId){return userRepository.findById(userId);}
     public String save(User user){userRepository.save(user); return "User saved";}
+    public Optional<User> findUserByEmail(String email){return userRepository.findByEmail(email);}
 }
