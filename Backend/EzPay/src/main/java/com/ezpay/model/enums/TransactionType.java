@@ -1,4 +1,4 @@
-package com.ezpay.utils.enums;
+package com.ezpay.model.enums;
 
 public enum TransactionType {
 
