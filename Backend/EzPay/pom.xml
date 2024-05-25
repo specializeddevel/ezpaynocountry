@@ -11,7 +11,7 @@
     <groupId>com.EzPay</groupId>
     <artifactId>EzPay</artifactId>
     <version>1</version>
-    <name>ezpay</name>
+    <name>EzPay</name>
     <description>EzPay</description>
     <properties>
         <java.version>17</java.version>

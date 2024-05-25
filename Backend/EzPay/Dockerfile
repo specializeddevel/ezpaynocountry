@@ -6,7 +6,7 @@ RUN apt-get update && \
     apt-get install -y openjdk-17-jdk maven
 
 # Copiar el código fuente del proyecto al contenedor
-COPY src .
+COPY . .
 
 # Usar Maven para construir el proyecto y generar el JAR
 RUN mvn package -DskipTests
@@ -20,8 +20,8 @@ EXPOSE 8080
 
 
 # Copiar el JAR desde el contenedor de construcción al contenedor de ejecución
-COPY --from=build target/ezpay-1.jar ezpay.jar
+COPY --from=build target/EzPay-1.jar EzPay.jar
 
 
 # Ejecutar la aplicación
-ENTRYPOINT ["java", "-jar", "ezpay.jar"]
+ENTRYPOINT ["java", "-jar", "EzPay.jar"]
