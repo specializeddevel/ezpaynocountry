@@ -6,7 +6,7 @@ RUN apt-get update && \
     apt-get install -y openjdk-17-jdk maven
 
 # Copiar el código fuente del proyecto al contenedor
-COPY src .
+COPY . .
 
 # Usar Maven para construir el proyecto y generar el JAR
 RUN mvn package -DskipTests
