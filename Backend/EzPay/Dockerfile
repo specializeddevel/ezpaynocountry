@@ -20,8 +20,8 @@ EXPOSE 8080
 
 
 # Copiar el JAR desde el contenedor de construcción al contenedor de ejecución
-COPY --from=build target/EzPay-1.jar EzPay.jar
+COPY --from=build target/ezpay-1.jar ezpay.jar
 
 
 # Ejecutar la aplicación
-ENTRYPOINT ["java", "-jar", "EzPay.jar"]
+ENTRYPOINT ["java", "-jar", "ezpay.jar"]
