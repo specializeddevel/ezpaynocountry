@@ -1,8 +1,11 @@
 package com.ezpay.model.entity;
 
 import com.ezpay.model.enums.AccountType;
+import com.ezpay.model.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -18,12 +21,8 @@ import java.util.Date;
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false, updatable = false, name = "account_id")
-    private Long accountId;
-
-    @Column(unique = true, nullable = false, length = 25)
-    private String accountNumber;
+    @Column(unique = true, nullable = false, updatable = false, name = "account_id", length = 25)
+    private String accountId;
 
     @Column(nullable = false, length = 15)
     @Enumerated(EnumType.STRING)
@@ -42,6 +41,9 @@ public class Account {
     private Double balance=0D;
 
     @Column(nullable = false)
+    private Double dailyLimit=0D;
+
+    @Column(nullable = false)
     private Boolean active=false;
 
     @Column(nullable = false)
@@ -50,6 +52,7 @@ public class Account {
     public Account(){
         this.balance = 0D;
         this.active = true;
+        this.dailyLimit = 0D;
     }
 
 }

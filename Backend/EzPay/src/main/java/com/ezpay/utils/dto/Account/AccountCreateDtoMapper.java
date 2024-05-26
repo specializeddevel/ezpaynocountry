@@ -10,9 +10,7 @@ public class AccountCreateDtoMapper implements Function<Account, AccountCreateDt
     public AccountCreateDto apply(Account account) {
 
         return new AccountCreateDto(
-                account.getAccountNumber(),
-                account.getCvu(),
-                account.getAccountType().getDescription(),
+                account.getAccountType(),
                 account.getUserId());
     }
 }

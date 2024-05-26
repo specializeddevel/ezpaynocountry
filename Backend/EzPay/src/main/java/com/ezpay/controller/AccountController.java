@@ -6,14 +6,17 @@ import com.ezpay.utils.dto.Account.AccountCreateDto;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
+@Validated
 @RequestMapping("/account")
 public class AccountController {
 
@@ -25,14 +28,8 @@ public class AccountController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> createAccount(@Valid @RequestBody AccountCreateDto data, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
-            StringBuilder errorMessage = new StringBuilder("Validation errors: ");
-            for (FieldError error : bindingResult.getFieldErrors()) {
-                errorMessage.append(error.getField()).append(" ").append(error.getDefaultMessage()).append("; ");
-            }
-            return ResponseEntity.badRequest().body(errorMessage.toString());
-        }
+    public ResponseEntity<?> createAccount(@Valid @RequestBody AccountCreateDto data)
+    {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.accountService.save(data));
     }
 
