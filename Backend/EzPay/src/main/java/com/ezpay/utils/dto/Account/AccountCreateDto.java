@@ -11,7 +11,7 @@ public record AccountCreateDto(
 
     @NotNull
     @Min(value = 1)
-    Long userId
+    Integer userId
 )
 {
 

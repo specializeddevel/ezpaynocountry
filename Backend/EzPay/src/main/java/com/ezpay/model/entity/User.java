@@ -62,6 +62,12 @@ public class User implements UserDetails {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Mexico_City")
     Timestamp createdAt;
 
+    @OneToOne(mappedBy = "user")
+    @JsonIgnore
+    private Account account;
+
+
+
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {

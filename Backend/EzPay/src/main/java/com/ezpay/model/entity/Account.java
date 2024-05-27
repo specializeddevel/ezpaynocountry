@@ -3,6 +3,7 @@ package com.ezpay.model.entity;
 import com.ezpay.model.enums.AccountType;
 import com.ezpay.model.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -44,14 +45,20 @@ public class Account {
     private Double dailyLimit=0D;
 
     @Column(nullable = false)
-    private Boolean active=false;
+    private Boolean isActive=false;
 
-    @Column(nullable = false)
-    private Long userId;
+    @Column(name = "user_id", unique = true, nullable = false)
+    private Integer userId;
+
+
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", updatable = false, insertable = false)
+    private User user;
+
 
     public Account(){
         this.balance = 0D;
-        this.active = true;
+        this.isActive = true;
         this.dailyLimit = 0D;
     }
 
