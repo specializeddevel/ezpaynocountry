@@ -1,8 +1,11 @@
 package com.ezpay.utils;
 
 import com.ezpay.model.enums.AccountType;
+import lombok.Getter;
 
 import java.security.SecureRandom;
+import java.time.LocalDate;
+import java.time.Period;
 
 public class AccountUtilities {
 
@@ -46,6 +49,26 @@ public class AccountUtilities {
             }
         }
         return 0D;
+    }
+
+    @Getter
+    public static class Age {
+        int years;
+        int months;
+        int days;
+
+        public Age(int years, int months, int days) {
+            this.years = years;
+            this.months = months;
+            this.days = days;
+        }
+    }
+
+    public static Age calculateAge(LocalDate birthDate) {
+        LocalDate currentDate = LocalDate.now();
+        Period period = Period.between(birthDate, currentDate);
+
+        return new Age(period.getYears(), period.getMonths(), period.getDays());
     }
 }
 

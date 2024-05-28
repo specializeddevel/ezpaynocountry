@@ -5,23 +5,15 @@ import jakarta.validation.ValidationException;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
+
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.View;
 
 import java.util.HashMap;
-import java.util.Map;
 
 @RestControllerAdvice
 public class ErrorManager {
-
-    private final View error;
-
-    public ErrorManager(View error) {
-        this.error = error;
-    }
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity treatError404() {
@@ -49,6 +41,22 @@ public class ErrorManager {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(UserNotFoundException.class)
     public HashMap<String, String> UserNotFoundException(UserNotFoundException e) {
+        HashMap<String, String> errors = new HashMap<>();
+        errors.put("error", e.getMessage());
+        return errors;
+    }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(UserHasAccountException.class)
+    public HashMap<String, String> UserHasAccountException(UserHasAccountException e) {
+        HashMap<String, String> errors = new HashMap<>();
+        errors.put("error", e.getMessage());
+        return errors;
+    }
+
+    @ResponseStatus(HttpStatus.LOCKED)
+    @ExceptionHandler(UnderAgeException.class)
+    public HashMap<String, String> UnderAgeException(UnderAgeException e) {
         HashMap<String, String> errors = new HashMap<>();
         errors.put("error", e.getMessage());
         return errors;
