@@ -63,7 +63,6 @@ public class User implements UserDetails {
     Timestamp createdAt;
 
     @OneToOne(mappedBy = "user")
-    @JsonIgnore
     private Account account;
 
 

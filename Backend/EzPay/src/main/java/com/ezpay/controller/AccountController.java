@@ -1,6 +1,5 @@
 package com.ezpay.controller;
 
-import com.ezpay.model.entity.Account;
 import com.ezpay.service.AccountService;
 import com.ezpay.utils.dto.Account.AccountCreateDto;
 import jakarta.validation.Valid;
@@ -11,9 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @Validated

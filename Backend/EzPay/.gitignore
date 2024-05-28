@@ -20,7 +20,7 @@ target/
 *.ipr
 
 # Ignore application.properties file
-application.properties
+# application.properties
 
 # Ignore environment variable files
 *.env

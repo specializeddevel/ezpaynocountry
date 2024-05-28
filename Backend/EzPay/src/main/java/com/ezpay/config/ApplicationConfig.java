@@ -1,4 +1,4 @@
-package com.ezpay.controller;
+package com.ezpay.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
