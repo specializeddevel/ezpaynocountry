@@ -45,21 +45,21 @@ public class AccountServiceImpl implements AccountService
         if (existByUserId(data.userId())
                 .isPresent()) { throw new UserHasAccountException(data.userId());}
         Optional<User> usuario = userService.findUserById(data.userId());
-        String fecha = usuario.get().getBirthDate().toString();
-        // Definir un formateador para el formato de entrada
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
-        // Convertir la cadena a LocalDateTime
-        LocalDateTime dateTime = LocalDateTime.parse(fecha, dateTimeFormatter);
-        // Extraer solo la fecha
-        LocalDate date = dateTime.toLocalDate();
-        // Definir un formateador para el formato de salida
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        // Formatear la fecha al formato deseado
-        String formattedDate = date.format(dateFormatter);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate birthDate = LocalDate.parse(formattedDate, formatter);
-        AccountUtilities.Age age = calculateAge(birthDate);
-        if(age.getYears()<18) {throw new UnderAgeException(age.getYears());}
+//        String fecha = usuario.get().getBirthDate().toString();
+//        // Definir un formateador para el formato de entrada
+//        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+//        // Convertir la cadena a LocalDateTime
+//        LocalDateTime dateTime = LocalDateTime.parse(fecha, dateTimeFormatter);
+//        // Extraer solo la fecha
+//        LocalDate date = dateTime.toLocalDate();
+//        // Definir un formateador para el formato de salida
+//        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        // Formatear la fecha al formato deseado
+//        String formattedDate = date.format(dateFormatter);
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        LocalDate birthDate = LocalDate.parse(formattedDate, formatter);
+//        AccountUtilities.Age age = calculateAge(birthDate);
+//        if(age.getYears()<18) {throw new UnderAgeException(age.getYears());}
         Account account = Account.builder()
                 .accountId(AccountUtilities.generateSecureAccountNumber())
                 .accountType(AccountType.valueOf(data.accountType().getDescription().toUpperCase()))
