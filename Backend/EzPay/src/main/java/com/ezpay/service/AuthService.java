@@ -38,7 +38,7 @@ public class AuthService {
 
 
     public AuthResponse register(RegisterRequest registerRequest) {
-        // Obtener la fecha actual para el registro del usuario
+
         Date currentDate = new Date();
         Timestamp currentTimestamp = new Timestamp(currentDate.getTime());
 
@@ -51,8 +51,9 @@ public class AuthService {
                 .dni(registerRequest.getDni())
                 .birthDate(registerRequest.getBirthDate())
                 .gender(Gender.valueOf(registerRequest.getGender()))
-                .role(Role.USER) // Por defecto los nuevos usuarios tendrán el rol USER.
-                .createdAt(currentTimestamp) // Establecer la fecha de creación del usuario
+                .role(Role.USER)
+                .createdAt(currentTimestamp)
+                .userEnabled(true)
                 .build();
 
         userRepository.save(user);

@@ -45,8 +45,8 @@ public class JwtService {
         return getClaim(token, Claims::getSubject);
     }
 
-    public Long getUserIdFromToken(String token) {
-        return getClaim(token, claims -> claims.get("user_id", Long.class));
+    public Integer getUserIdFromToken(String token) {
+        return getClaim(token, claims -> claims.get("user_id", Integer.class));
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
