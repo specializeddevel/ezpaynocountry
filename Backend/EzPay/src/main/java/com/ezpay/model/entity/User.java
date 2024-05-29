@@ -50,17 +50,26 @@ public class User implements UserDetails {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Mexico_City")
     private Date birthDate;
 
-    @Column(name = "gender", columnDefinition = "VARCHAR(17) default 'PREFIERO_NO_DECIR'")
+    @Column(name = "gender", columnDefinition = "VARCHAR(17) DEFAULT 'PREFIERO_NO_DECIR'")
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(name = "role", columnDefinition = "VARCHAR(5) default 'USER'")
+    @Column(name = "role", columnDefinition = "VARCHAR(5) DEFAULT 'USER'")
     @Enumerated(EnumType.STRING)
     private Role role;
 
     @Column(name = "created_At")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "America/Mexico_City")
-    Timestamp createdAt;
+    private Timestamp createdAt;
+
+    @Column(name = "user_enable", columnDefinition = "BOOLEAN DEFAULT TRUE")
+    private boolean userEnabled = true;
+
+
+
+
+
+
 
     @OneToOne(mappedBy = "user")
     private Account account;
