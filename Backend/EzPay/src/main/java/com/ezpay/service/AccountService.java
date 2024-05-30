@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface AccountService {
 
-    Account save(AccountCreateDto accountCreateDto);
+    Account save(AccountCreateDto accountCreateDto) throws Exception;
     Optional<Account> existByUserId(Integer userId);
 
 }

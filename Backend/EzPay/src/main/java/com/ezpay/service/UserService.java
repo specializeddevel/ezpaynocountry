@@ -1,5 +1,6 @@
 package com.ezpay.service;
 
+import com.ezpay.exceptions.UserNotFoundException;
 import com.ezpay.model.entity.User;
 import com.ezpay.model.enums.Gender;
 import com.ezpay.repository.UserRepository;
@@ -25,9 +26,16 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public List<User> findAllUsers(){return userRepository.findAll();}
-    public Optional<User> findUserById(Integer userId){return userRepository.findById(userId);}
+
+    public User findUserById(Integer userId) throws Exception {
+           Optional<User> userOptional = userRepository.findById(userId);
+           User user = userOptional.orElseThrow(() -> new UserNotFoundException(userId));
+        return user;
+    }
     public String save(User user){user.setUserEnabled(true);userRepository.save(user);return "User saved";}
+
     public Optional<User> findUserByEmail(String email){return userRepository.findByEmail(email);}
+
     public String delete(Integer userId) throws Exception {
         Optional<User> userOptional = userRepository.findById(userId);
         User user = userOptional.orElseThrow(() -> new Exception("User not found"));

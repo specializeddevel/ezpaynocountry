@@ -40,6 +40,14 @@ public class UserController {
         return userService.delete(userId);
     }
 
+    @GetMapping(value = "/findUser")
+    public ResponseEntity<User> getUser(@RequestHeader("token") String token) throws Exception{
+        Integer userId = jwtService.getUserIdFromToken(token);
+        return ResponseEntity.ok(userService.findUserById(userId));
+    }
+
+
+
 
 
 }

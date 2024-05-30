@@ -24,8 +24,7 @@ public class AccountController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> createAccount(@Valid @RequestBody AccountCreateDto data)
-    {
+    public ResponseEntity<?> createAccount(@Valid @RequestBody AccountCreateDto data) throws Exception {
         return ResponseEntity.status(HttpStatus.CREATED).body(this.accountService.save(data));
     }
 
