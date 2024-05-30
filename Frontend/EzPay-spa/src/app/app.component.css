@@ -1,0 +1,84 @@
+.wrapper {
+    width: 90%;
+    margin: 0 auto;
+    padding: 5rem 0;
+    max-width: 1536px;
+    overflow: hidden;
+}
+
+.header .wrapper {
+    padding: 0 0;
+}
+
+.nav-links{
+    font-size: var(--fontSizeBtnLink2);
+    line-height: var(--lineHeightBtnLink2);
+}
+
+.btn-custom-one {
+    background-color: var(--sColorSecondary100);
+    color: var(--sColorSecondary700);
+    border-radius: 15px;
+}
+
+.btn-custom-one:hover {
+    background-color: var(--sColorSecondary700);
+    color: white;
+    transition: all 0.5s ease-in-out 0.2s;
+}
+
+.btn-custom-two {
+    background-image: linear-gradient(to bottom, #2392f7, #1d8bf2, #1884ed, #147ce8, #1275e3);
+    color: white;
+    border-radius: 15px;
+}
+
+.btn-custom-two:hover {
+    background-color: var(--sColorSecondary100);
+    color: var(--sColorSecondary100);
+    transition: all 0.5s ease-in-out 0.2s;
+}
+
+
+.hero {
+    height: 90vh;
+    background-image: url('../assets/hero/Hero-Image-2.jpg');
+    /* linear-gradient(to right bottom, #155db8, #3e83cd, #6da9de, #a0ceee, #d9f2ff), */
+    /* background-image: linear-gradient(135deg, var(--sColorSecondary100) 0%, var(--sColorSecondary100) 44%), url('../assets/hero/Hero-Image-2.jpg'); */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+   
+
+}
+
+.hero-heading {
+    font-size: var(--fontSizeHeading1);
+    line-height: var(--lineHeightHeading1);
+    color: var(--pColorBackgound);
+    margin-top: 7.5rem ;
+}
+.hero-heading-custom{
+    color:var(--gHorizontal-2);
+}
+
+
+.hero-btn{
+    width: 240px;
+    height: 50px;
+    padding: 13px 24px;
+    display: block;
+    background-image: linear-gradient(to bottom, #2392f7, #1d8bf2, #1884ed, #147ce8, #1275e3);
+    color:var(--sColorBlank);
+    border-radius: 15px;
+    text-align: center;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+
+.function-heading{
+    font-size: var(--fontSizeHeading2);
+    line-height: var(--lineHeightHeading2);
+    color: var(--pColorText);
+}
