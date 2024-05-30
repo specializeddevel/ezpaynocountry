@@ -1,1 +1,60 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+    
+    /* Primary colors */
+    --pColorPrimary: #2392f7;
+    --pColorBackgound: #f5f5f5;
+    --pColorText: #080808;
+    /* seconday colors */
+    --sColorSecondary: #155db8;
+    --sColorSecondary100: #d9f2ff;
+    --sColorSecondary700: #1273e2;
+    --sColorBlank: #ffffff;
+    --sColorGrey: #717171;
+    /* gradients */
+    --gVertical-1: #2392f7;
+    --gVertical-2: #1275e3;
+    --gHorizontal-1: #2392f7;
+    --gHorizontal-2: #1275e3;
+    /* alert colors */
+    --error:#bd2734;
+    --alert:#ff6600;
+    --success:#79b465
+    /* fonst size base */
+    --fontSizeBase:1rem;
+    /* text headings */
+    --fontSizeHeading1:3rem;
+    --fontSizeHeading2:2.25rem;
+    --fontSizeHeading3:1.75rem;
+    --fontSizeheading4:1.25rem;
+
+    --lineHeightHeading1:3.5rem,
+    --lineHeightHeading2:3rem, 
+    --lineHeightHeading3:2.25rem
+    --lineHeightHeading4:1.75rem 
+    
+    /* text body */
+    --fontSizeBody1:28px;
+    --fontSizeBody2:20px;
+    --fontSizeBody3:18px;
+    --fontSizeBody4:16px;
+
+    --lineHeightBody1:36px;
+    --lineHeightBody2:28px; 
+    --lineHeightBody3:24px;
+    --lineHeightBody4:20px; 
+    
+    /* text btn-link */
+    --fontSizeBtnLink1:18px;
+    --fontSizeBtnLink2:16px;
+    --fontSizeBtnLink3:14px;
+
+    --lineHeightBtnLink1:24px;
+    --lineHeightBtnLink2:20px; 
+    --lineHeightBtnLink3:20px;
+
+    /* --padding:
+    --margin: */
+   
+}
