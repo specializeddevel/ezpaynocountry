@@ -12,6 +12,7 @@ import com.ezpay.utils.AccountUtilities;
 import com.ezpay.utils.dto.Account.AccountCreateDto;
 import jakarta.transaction.Transactional;
 import org.springframework.cglib.core.Local;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 import java.util.Optional;
 
 import static com.ezpay.utils.AccountUtilities.calculateAge;
@@ -40,7 +42,7 @@ public class AccountServiceImpl implements AccountService
     public Account save(AccountCreateDto data) throws Exception {
 
         /*si el usuario no existe */
-        User user = userService.findUserById(data.userId());
+        ResponseEntity<Map<String, String>> user = userService.findUserById(data.userId());
         /*Si el usuario ya tiene una ccuenta*/
         if (existByUserId(data.userId())
                 .isPresent()) { throw new UserHasAccountException(data.userId());}

@@ -28,27 +28,47 @@ public class UserService {
 
     public List<User> findAllUsers(){return userRepository.findAll();}
 
-    public User findUserById(Integer userId) throws Exception {
-           Optional<User> userOptional = userRepository.findById(userId);
-           User user = userOptional.orElseThrow(() -> new UserNotFoundException(userId));
-        return user;
-    }
-    public ResponseEntity<String> save(User user){
-        user.setUserEnabled(true);
-        userRepository.save(user);
-        return ResponseEntity.ok("User saved");
+    public ResponseEntity<Map<String, String>> findUserById(Integer userId) throws Exception {
+        try {
+            Optional<User> userOptional = userRepository.findById(userId);
+            User user = userOptional.orElseThrow(() -> new UserNotFoundException(userId));
+
+            Map<String, String> response = new HashMap<>();
+            response.put("success", "User found");
+            return ResponseEntity.ok(response);
+
+        } catch (UserNotFoundException e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "An unexpected error occurred");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+
+
     }
 
-    public Optional<User> findUserByEmail(String email){
-        return userRepository.findByEmail(email);
-    }
-
-    public String delete(Integer userId) throws Exception {
-        Optional<User> userOptional = userRepository.findById(userId);
-        User user = userOptional.orElseThrow(() -> new UserNotFoundException(userId));
-        user.setUserEnabled(false);
-        userRepository.save(user);
-        return "User deleted";
+    public ResponseEntity<Map<String, String>> disable(Integer userId) throws Exception {
+        try {
+            Optional<User> userOptional = userRepository.findById(userId);
+            User user = userOptional.orElseThrow(() -> new UserNotFoundException(userId));
+            user.setUserEnabled(false);
+            userRepository.save(user);
+            Map<String, String> response = new HashMap<>();
+            response.put("success", "User disabled successfully");
+            return ResponseEntity.ok(response);
+        } catch (UserNotFoundException e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "User not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "An unexpected error occurred");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
     }
     public ResponseEntity<Map<String, String>> update(Integer userId, @RequestBody Map<String, Object> updates) throws Exception {
         Optional<User> userOptional = userRepository.findById(userId);
