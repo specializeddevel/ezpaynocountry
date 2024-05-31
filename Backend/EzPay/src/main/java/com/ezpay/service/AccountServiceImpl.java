@@ -41,7 +41,7 @@ public class AccountServiceImpl implements AccountService
         /*si el usuario no existe */
         userService.findUserById(data.userId())
                 .orElseThrow(() -> new UserNotFoundException(data.userId()));
-        /*Si el usuario ya tiene una ccuenta*/
+        /*Si el usuario ya tiene una cuenta creada se dispara una excepcion*/
         if (existByUserId(data.userId())
                 .isPresent()) { throw new UserHasAccountException(data.userId());}
         Optional<User> usuario = userService.findUserById(data.userId());
