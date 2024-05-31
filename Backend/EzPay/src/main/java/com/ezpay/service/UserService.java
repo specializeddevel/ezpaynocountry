@@ -1,5 +1,6 @@
 package com.ezpay.service;
 
+import com.ezpay.exceptions.UserNotFoundException;
 import com.ezpay.model.entity.User;
 import com.ezpay.model.enums.Gender;
 import com.ezpay.repository.UserRepository;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -25,19 +27,52 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public List<User> findAllUsers(){return userRepository.findAll();}
-    public Optional<User> findUserById(Integer userId){return userRepository.findById(userId);}
-    public String save(User user){user.setUserEnabled(true);userRepository.save(user);return "User saved";}
-    public Optional<User> findUserByEmail(String email){return userRepository.findByEmail(email);}
-    public String delete(Integer userId) throws Exception {
-        Optional<User> userOptional = userRepository.findById(userId);
-        User user = userOptional.orElseThrow(() -> new Exception("User not found"));
-        user.setUserEnabled(false);
-        userRepository.save(user);
-        return "User deleted";
+
+    public ResponseEntity<Map<String, String>> findUserById(Integer userId) throws Exception {
+        try {
+            Optional<User> userOptional = userRepository.findById(userId);
+            User user = userOptional.orElseThrow(() -> new UserNotFoundException(userId));
+
+            Map<String, String> response = new HashMap<>();
+            response.put("success", "User found");
+            return ResponseEntity.ok(response);
+
+        } catch (UserNotFoundException e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "An unexpected error occurred");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+
+
     }
-    public ResponseEntity<String> update(Integer userId, @RequestBody Map<String, Object> updates) throws Exception {
+
+    public ResponseEntity<Map<String, String>> disable(Integer userId) throws Exception {
+        try {
+            Optional<User> userOptional = userRepository.findById(userId);
+            User user = userOptional.orElseThrow(() -> new UserNotFoundException(userId));
+            user.setUserEnabled(false);
+            userRepository.save(user);
+            Map<String, String> response = new HashMap<>();
+            response.put("success", "User disabled successfully");
+            return ResponseEntity.ok(response);
+        } catch (UserNotFoundException e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "User not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("error", "An unexpected error occurred");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
+    }
+    public ResponseEntity<Map<String, String>> update(Integer userId, @RequestBody Map<String, Object> updates) throws Exception {
         Optional<User> userOptional = userRepository.findById(userId);
-        User user = userOptional.orElseThrow(() -> new Exception("User not found"));
+        User user = userOptional.orElseThrow(() -> new UserNotFoundException(userId));
 
         if (updates.containsKey("firstName")) {
             user.setFirstName((String) updates.get("firstName"));
@@ -62,18 +97,25 @@ public class UserService {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 user.setBirthDate(dateFormat.parse((String) updates.get("birthDate")));
             } catch (ParseException e) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid date format");
+                Map<String, String> errorResponse = new HashMap<>();
+                errorResponse.put("error", "Invalid date format");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
             }
         }
         if (updates.containsKey("gender")) {
             try {
                 user.setGender(Gender.valueOf((String) updates.get("gender")));
             } catch (IllegalArgumentException e) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid gender value");
+                Map<String, String> errorResponse = new HashMap<>();
+                errorResponse.put("error", "Invalid gender value");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
             }
         }
 
         userRepository.save(user);
-        return ResponseEntity.ok("User updated successfully");
+
+        Map<String, String> successResponse = new HashMap<>();
+        successResponse.put("success", "User updated successfully");
+        return ResponseEntity.ok(successResponse);
     }
 }
