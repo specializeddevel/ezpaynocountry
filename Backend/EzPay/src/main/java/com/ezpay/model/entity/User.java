@@ -65,16 +65,8 @@ public class User implements UserDetails {
     @Column(name = "user_enable", columnDefinition = "BOOLEAN DEFAULT TRUE")
     private boolean userEnabled = true;
 
-
-
-
-
-
-
     @OneToOne(mappedBy = "user")
     private Account account;
-
-
 
     @Override
     @JsonIgnore
