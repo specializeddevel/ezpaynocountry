@@ -1,5 +1,6 @@
 package com.ezpay.service;
 
+import com.ezpay.exceptions.EmailAlreadyExistsException;
 import com.ezpay.model.entity.User;
 import com.ezpay.model.enums.Gender;
 import com.ezpay.security.request.LoginRequest;
@@ -39,6 +40,9 @@ public class AuthService {
 
     public AuthResponse register(RegisterRequest registerRequest) {
 
+        if(userRepository.existsByEmail(registerRequest.getEmail())){
+            throw new EmailAlreadyExistsException(registerRequest.getEmail());
+        }
         Date currentDate = new Date();
         Timestamp currentTimestamp = new Timestamp(currentDate.getTime());
 
