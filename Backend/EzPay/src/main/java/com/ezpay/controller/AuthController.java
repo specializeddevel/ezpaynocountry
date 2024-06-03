@@ -1,6 +1,7 @@
 package com.ezpay.controller;
 
 import com.ezpay.exceptions.UserNotFoundException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import com.ezpay.security.request.LoginRequest;
@@ -35,7 +36,7 @@ public class AuthController {
     }
 
     @PostMapping(value = "register")
-    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<String> register(@Valid @RequestBody RegisterRequest request) {
         authService.register(request);
         return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
     }
