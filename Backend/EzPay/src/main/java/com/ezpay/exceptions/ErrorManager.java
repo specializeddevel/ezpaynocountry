@@ -62,5 +62,13 @@ public class ErrorManager {
         return errors;
     }
 
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public HashMap<String, String> EmailAlreadyExistsException(EmailAlreadyExistsException e) {
+        HashMap<String, String> errors = new HashMap<>();
+        errors.put("error", e.getMessage());
+        return errors;
+    }
+
 
 }
