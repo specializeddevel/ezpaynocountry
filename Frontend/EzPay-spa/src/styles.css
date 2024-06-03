@@ -49,9 +49,9 @@
     --lineHeightBody3:24px;
     --lineHeightBody4:20px; 
     
-    /* text headings mobile */
-    --fontSizeMobileHeading1:1.125rem;
-    --lineHeightMobileHeading1:1.5rem;
+    /* text body headings mobile */
+    --fontSizeBodyMobileHeading2:1.125rem;
+    --lineHeightBodyMobileHeading2:1.25rem;
 
     /* text btn-link */
     --fontSizeBtnLink1:18px;
