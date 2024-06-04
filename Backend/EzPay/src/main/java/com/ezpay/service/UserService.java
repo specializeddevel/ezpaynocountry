@@ -4,6 +4,7 @@ import com.ezpay.exceptions.UserNotFoundException;
 import com.ezpay.model.entity.User;
 import com.ezpay.model.enums.Gender;
 import com.ezpay.repository.UserRepository;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -70,7 +71,7 @@ public class UserService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
-    public ResponseEntity<Map<String, String>> update(Integer userId, @RequestBody Map<String, Object> updates) throws Exception {
+    public ResponseEntity<Map<String, String>> update(Integer userId,@Valid @RequestBody Map<String, Object> updates) throws Exception {
         Optional<User> userOptional = userRepository.findById(userId);
         User user = userOptional.orElseThrow(() -> new UserNotFoundException(userId));
 

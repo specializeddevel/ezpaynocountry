@@ -19,7 +19,7 @@ import java.util.List;
 @Builder
 @Data
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails {
@@ -34,7 +34,7 @@ public class User implements UserDetails {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password")
