@@ -40,14 +40,13 @@ public class AccountServiceImpl implements AccountService
     @Override
     @Transactional
     public Account save(AccountCreateDto data) throws Exception {
-
         /*si el usuario no existe */
         ResponseEntity<Map<String, String>> user = userService.findUserById(data.userId());
-        /*Si el usuario ya tiene una ccuenta*/
+        //userService.findUserById(data.userId())
+        //        .orElseThrow(() -> new UserNotFoundException(data.userId()));
+        /*Si el usuario ya tiene una cuenta creada se dispara una excepcion*/
         if (existByUserId(data.userId())
                 .isPresent()) { throw new UserHasAccountException(data.userId());}
-
-//        Optional<User> usuario = userService.findUserById(data.userId());
 //        String fecha = usuario.get().getBirthDate().toString();
 //        // Definir un formateador para el formato de entrada
 //        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
