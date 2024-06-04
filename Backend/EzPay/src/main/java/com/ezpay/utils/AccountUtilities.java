@@ -4,8 +4,11 @@ import com.ezpay.model.enums.AccountType;
 import lombok.Getter;
 
 import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Date;
+import java.util.function.Consumer;
 
 public class AccountUtilities {
 
@@ -31,8 +34,7 @@ public class AccountUtilities {
         return accountNumber.toString();
     }
 
-    public static Double setLimitByAccountType(AccountType accountType)
-    {
+    public static Double setLimitByAccountType(AccountType accountType) {
         final Double PERSONAL_LIMIT = 50_000D;
         final Double BUSINESS_LIMIT = 200_000D;
         final Double PLATINUM_LIMIT = 1_000_000D;
@@ -70,5 +72,11 @@ public class AccountUtilities {
 
         return new Age(period.getYears(), period.getMonths(), period.getDays());
     }
+
+
+    public static Consumer<Date> formatDate = date -> {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        System.out.println(formatter.format(date));
+    };
 }
 
