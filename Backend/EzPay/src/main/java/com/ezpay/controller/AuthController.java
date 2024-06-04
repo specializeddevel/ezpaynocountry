@@ -1,6 +1,8 @@
 package com.ezpay.controller;
 
 import com.ezpay.exceptions.UserNotFoundException;
+import com.ezpay.model.entity.User;
+import com.ezpay.repository.UserRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -16,16 +18,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
 
     private final AuthService authService;
+    private final UserRepository userRepository;
 
     @PostMapping(value = "login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request){
         try {
+            Optional<User> userOptional = userRepository.findByEmail(request.getEmail());
+            User user = userOptional.orElseThrow(() -> new UserNotFoundException(request.getEmail()));
             AuthResponse authResponse = authService.login(request);
             return ResponseEntity.ok(authResponse);
         } catch (UserNotFoundException e) {

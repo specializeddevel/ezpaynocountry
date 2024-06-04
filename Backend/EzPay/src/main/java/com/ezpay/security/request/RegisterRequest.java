@@ -30,7 +30,7 @@ public class RegisterRequest {
     String password;
 
     @NotBlank(message = "Phone number cannot be blank")
-    @Pattern(regexp = "^\\+?[0-9. ()-]{7,25}$", message = "Phone number is invalid")
+    @Pattern(regexp = "^\\+?[0-9]{7,25}$", message = "Phone number is invalid")
     String phoneNumber;
 
     @NotBlank(message = "DNI cannot be blank")
@@ -39,6 +39,7 @@ public class RegisterRequest {
 
     @NotNull(message = "Birth date cannot be null")
     @Past(message = "Birth date must be in the past")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date birthDate;
 
     @NotBlank(message = "Gender cannot be blank")

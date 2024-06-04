@@ -70,5 +70,21 @@ public class ErrorManager {
         return errors;
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(InvalidGenderValueException.class)
+    public HashMap<String, String> handleInvalidGenderValueException(InvalidGenderValueException e) {
+        HashMap<String, String> errors = new HashMap<>();
+        errors.put("error", e.getMessage());
+        return errors;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(InvalidDateFormatException.class)
+    public HashMap<String, String> handleInvalidDateFormatException(InvalidDateFormatException e) {
+        HashMap<String, String> errors = new HashMap<>();
+        errors.put("error", e.getMessage());
+        return errors;
+    }
+
 
 }
