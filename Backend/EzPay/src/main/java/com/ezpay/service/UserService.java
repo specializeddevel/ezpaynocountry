@@ -1,9 +1,12 @@
 package com.ezpay.service;
 
+import com.ezpay.exceptions.InvalidDateFormatException;
+import com.ezpay.exceptions.InvalidGenderValueException;
 import com.ezpay.exceptions.UserNotFoundException;
 import com.ezpay.model.entity.User;
 import com.ezpay.model.enums.Gender;
 import com.ezpay.repository.UserRepository;
+import com.ezpay.utils.dto.User.UserUpdateDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,98 +28,50 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
-    public List<User> findAllUsers(){return userRepository.findAll();}
-
-    public ResponseEntity<Map<String, String>> findUserById(Integer userId) throws Exception {
-        try {
-            Optional<User> userOptional = userRepository.findById(userId);
-            User user = userOptional.orElseThrow(() -> new UserNotFoundException(userId));
-
-            Map<String, String> response = new HashMap<>();
-            response.put("success", "User found");
-            return ResponseEntity.ok(response);
-
-        } catch (UserNotFoundException e) {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", e.getMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-
-        } catch (Exception e) {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", "An unexpected error occurred");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-        }
-
-
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
     }
 
-    public ResponseEntity<Map<String, String>> disable(Integer userId) throws Exception {
-        try {
-            Optional<User> userOptional = userRepository.findById(userId);
-            User user = userOptional.orElseThrow(() -> new UserNotFoundException(userId));
-            user.setUserEnabled(false);
-            userRepository.save(user);
-            Map<String, String> response = new HashMap<>();
-            response.put("success", "User disabled successfully");
-            return ResponseEntity.ok(response);
-        } catch (UserNotFoundException e) {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", "User not found");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        } catch (Exception e) {
-            Map<String, String> response = new HashMap<>();
-            response.put("error", "An unexpected error occurred");
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-        }
+    public User findUserById(Integer userId) throws Exception {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
     }
-    public ResponseEntity<Map<String, String>> update(Integer userId,@Valid @RequestBody Map<String, Object> updates) throws Exception {
+
+    public void disable(Integer userId) throws Exception {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(userId));
+        user.setUserEnabled(false);
+
+        userRepository.save(user);
+    }
+
+    public void update(Integer userId, UserUpdateDto updates) throws Exception {
         Optional<User> userOptional = userRepository.findById(userId);
         User user = userOptional.orElseThrow(() -> new UserNotFoundException(userId));
 
-        if (updates.containsKey("firstName")) {
-            user.setFirstName((String) updates.get("firstName"));
+        if (updates.firstName() != null) {
+            user.setFirstName(updates.firstName());
         }
-        if (updates.containsKey("lastName")) {
-            user.setLastName((String) updates.get("lastName"));
+        if (updates.lastName() != null) {
+            user.setLastName(updates.lastName());
         }
-        if (updates.containsKey("email")) {
-            user.setEmail((String) updates.get("email"));
+        if (updates.phoneNumber() != null) {
+            user.setPhoneNumber(updates.phoneNumber());
         }
-        if (updates.containsKey("password")) {
-            user.setPassword(passwordEncoder.encode((String) updates.get("password")));
+        if (updates.dni() != null) {
+            user.setDni(updates.dni());
         }
-        if (updates.containsKey("phoneNumber")) {
-            user.setPhoneNumber((String) updates.get("phoneNumber"));
+        if (updates.birthDate() != null) {
+            user.setBirthDate(updates.birthDate());
         }
-        if (updates.containsKey("dni")) {
-            user.setDni((String) updates.get("dni"));
-        }
-        if (updates.containsKey("birthDate")) {
+        if (updates.gender() != null) {
             try {
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                user.setBirthDate(dateFormat.parse((String) updates.get("birthDate")));
-            } catch (ParseException e) {
-                Map<String, String> errorResponse = new HashMap<>();
-                errorResponse.put("error", "Invalid date format");
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
-            }
-        }
-        if (updates.containsKey("gender")) {
-            try {
-                user.setGender(Gender.valueOf((String) updates.get("gender")));
+                user.setGender(Gender.valueOf(updates.gender().toUpperCase()));
             } catch (IllegalArgumentException e) {
-                Map<String, String> errorResponse = new HashMap<>();
-                errorResponse.put("error", "Invalid gender value");
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+                throw new InvalidGenderValueException("Invalid gender value", e);
             }
         }
-
         userRepository.save(user);
-
-        Map<String, String> successResponse = new HashMap<>();
-        successResponse.put("success", "User updated successfully");
-        return ResponseEntity.ok(successResponse);
     }
 }
