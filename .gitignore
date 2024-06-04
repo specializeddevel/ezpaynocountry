@@ -3,3 +3,4 @@
 
 # Ignore environment variable files
 *.env
+Backend/EzPay/src/main/resources/application.properties
