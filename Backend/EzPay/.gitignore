@@ -18,6 +18,7 @@ target/
 *.iws
 *.iml
 *.ipr
+C:\Workspace\Repositorios-GIT\NoCountry\Respaldo-EzPay-NoCountry15java\ezpaynocountry\Backend\EzPay\src\main\resources\application.properties
 
 # Ignore application.properties file
 # application.properties

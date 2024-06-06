@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-EzPayApplication<EzPay>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.ezpay.EzPayApplication",
+            "projectName": "EzPay",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

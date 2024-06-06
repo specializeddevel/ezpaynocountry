@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Validated
-@RequestMapping("/account")
+@RequestMapping("/accounts")
 public class AccountController {
 
     private final AccountService accountService;
@@ -24,8 +24,8 @@ public class AccountController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> createAccount(@Valid @RequestBody AccountCreateDto data) throws Exception {
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.accountService.save(data));
+    public ResponseEntity<?> createAccount(@Valid @RequestBody AccountCreateDto data) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.accountService.newAccount(data));
     }
 
 }
