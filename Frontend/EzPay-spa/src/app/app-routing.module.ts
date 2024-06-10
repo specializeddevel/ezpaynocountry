@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './layout/home/home.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
   
   // { path: 'home', loadComponent:()=> import('./layout/home/home.component') },
   { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
   // Fallback when no prior routes is matched or 404
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];
