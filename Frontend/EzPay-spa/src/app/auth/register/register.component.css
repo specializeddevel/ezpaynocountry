@@ -42,7 +42,9 @@
 .form-input {
     width: 399px;
     height: 50px;
+    border: 1px solid rgba(113, 113, 113, 1);
     border-radius: 15px;
+    padding-left: 15px;
 }
 
 .form-button {
@@ -52,7 +54,10 @@
     height: 50px;
     gap: 10px;
     border-radius: 15px;
-    padding: 13px 24px;
+    padding: 1px 24px;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
 }
 
 .form-login {
@@ -62,4 +67,8 @@
 
 .form-login p {
     margin-right: 5px;
+}
+
+.form-login a {
+    text-decoration: none;
 }
