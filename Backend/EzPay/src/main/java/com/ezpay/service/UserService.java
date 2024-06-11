@@ -33,9 +33,9 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User findUserById(Integer userId) throws Exception {
-        return userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException(userId));
+    public Optional<User> findUserById(Integer userId)  {
+        return Optional.ofNullable(userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId)));
+
     }
 
     public void disable(Integer userId) throws Exception {

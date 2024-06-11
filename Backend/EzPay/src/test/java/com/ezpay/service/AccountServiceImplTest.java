@@ -43,20 +43,20 @@ public class AccountServiceImplTest {
         accountCreateDto = new AccountCreateDto(AccountType.PERSONAL,1);
     }
 
-//    @Test
-//    @Transactional
-//    public void testNewAccount_UserNotFound() throws Exception {
-//        // Simula que el usuario no existe
-//        when(userService.findUserById(accountCreateDto.userId()).thenReturn(Optional.empty());
-//
-//        // Verifica que se lance la excepción correcta
-//        assertThrows(UserNotFoundException.class, () -> {
-//            accountService.newAccount(accountCreateDto);
-//        });
-//
-//        // Verifica que el método de repositorio no se haya llamado
-//        verify(accountRepository, never()).save(any(Account.class));
-//    }
+    @Test
+    @Transactional
+    public void testNewAccount_UserNotFound() throws Exception {
+        // Simula que el usuario no existe
+        when(userService.findUserById(accountCreateDto.userId())).thenReturn(Optional.empty());
+
+        // Verifica que se lance la excepción correcta
+        assertThrows(UserNotFoundException.class, () -> {
+            accountService.newAccount(accountCreateDto);
+        });
+
+        // Verifica que el método de repositorio no se haya llamado
+        verify(accountRepository, never()).save(any(Account.class));
+    }
 
     @Test
     @Transactional
@@ -80,7 +80,7 @@ public class AccountServiceImplTest {
     @DisplayName("Should pass if the account was created.")
     public void testNewAccount_Success() throws Exception {
         // Simula que el usuario existe y no tiene una cuenta
-        //when(userService.findUserById(accountCreateDto.userId())).thenReturn(Optional.of(new User()));
+        when(userService.findUserById(accountCreateDto.userId())).thenReturn(Optional.of(new User()));
         when(accountRepository.findByUserId(accountCreateDto.userId())).thenReturn(Optional.empty());
 
         // Verifica que se guarde una cuenta nueva

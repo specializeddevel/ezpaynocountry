@@ -1,6 +1,7 @@
 package com.ezpay.service;
 
 import com.ezpay.exceptions.UserHasAccountException;
+import com.ezpay.exceptions.UserNotFoundException;
 import com.ezpay.model.entity.Account;
 import com.ezpay.model.enums.AccountType;
 import com.ezpay.repository.AccountRepository;
@@ -28,11 +29,9 @@ public class AccountServiceImpl implements AccountService
     }
 
     @Transactional
-    public Account newAccount(AccountCreateDto data) {
+    public Account newAccount(AccountCreateDto data)  {
         /*si el usuario no existe */
-        //ResponseEntity<Map<String, String>> user = userService.findUserById(data.userId());
-        //userService.findUserById(data.userId())
-        //        .orElseThrow(() -> new UserNotFoundException(data.userId()));
+               userService.findUserById(data.userId()).orElseThrow(() -> new UserNotFoundException(data.userId()));
         /*Si el usuario ya tiene una cuenta creada se dispara una excepcion*/
         if (existByUserId(data.userId())
                 .isPresent()) { throw new UserHasAccountException(data.userId());}

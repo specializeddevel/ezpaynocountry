@@ -2,6 +2,7 @@ package com.ezpay.utils;
 
 import com.ezpay.model.enums.AccountType;
 import lombok.Getter;
+import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
@@ -10,6 +11,7 @@ import java.time.Period;
 import java.util.Date;
 import java.util.function.Consumer;
 
+@Component
 public class AccountUtilities {
 
     private static final SecureRandom secureRandom = new SecureRandom();
