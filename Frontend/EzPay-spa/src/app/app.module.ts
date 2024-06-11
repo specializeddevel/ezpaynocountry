@@ -6,12 +6,13 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { CoreModule } from './core/core.module';
 import {HomeComponent}  from './layout/home/home.component';
+import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import InicioComponent from './modules/dashboard/pages/inicio/inicio.component';
 
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, HomeComponent, DashboardComponent, InicioComponent],
+  declarations: [AppComponent, RegisterComponent, HomeComponent, DashboardComponent, InicioComponent, LoginComponent],
   imports: [
     BrowserModule, 
     //features

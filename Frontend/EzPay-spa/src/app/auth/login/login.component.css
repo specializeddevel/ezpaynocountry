@@ -1,10 +1,10 @@
-.register-container {
+.login-container {
     width: 100vw;
     height: 100vh;
     display: flex;
 }
 
-.register-img {
+.login-img {
     height: 100%;
     width: 100%;
 }
@@ -31,7 +31,7 @@
 }
 
 
-#form-register {
+#form-login {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -47,12 +47,16 @@
     padding-left: 15px;
 }
 
+.reset-password {
+    align-self: flex-end;
+    font-weight: bold;
+}
+
 .form-button {
     background-color: rgb(35, 146, 247);
     color: white;
     width: 190px;
     height: 50px;
-    gap: 10px;
     border-radius: 15px;
     padding: 1px 24px;
     font-size: 20px;
@@ -60,15 +64,15 @@
     text-align: center;
 }
 
-.form-login {
+.form-register {
     display: flex;
     flex-direction: row;
 }
 
-.form-login p {
+.form-register p {
     margin-right: 5px;
 }
 
-.form-login a {
+.form-register a {
     text-decoration: none;
 }
