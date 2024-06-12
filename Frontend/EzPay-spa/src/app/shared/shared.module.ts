@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NavComponent } from './components/nav/nav.component';
+import { ContactUsersComponent } from './components/contact-users/contact-users.component';
 // import { BrowserModule } from "@angular/platform-browser";
 // import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
@@ -22,9 +23,10 @@ const SHARED_MODULES = [
 @NgModule({
   providers: [],
   declarations: [
-    NavComponent
+    NavComponent,
+    ContactUsersComponent
   ],
   imports: [...SHARED_MODULES],
-  exports: [NavComponent],
+  exports: [NavComponent, ContactUsersComponent],
 })
 export class SharedModule {}

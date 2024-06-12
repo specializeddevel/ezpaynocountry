@@ -1,0 +1,103 @@
+<div class="card container-fluid">
+  <div class="m-4">
+    <div class="balance">
+      <h3 class="balance__title fw-normal">Disponible</h3>
+      <div *ngIf="showBalance; then balance; else noBalance"></div>
+      <ng-template #balance>
+        <div class="flex-row gap-2 d-flex flex-sm-column">
+          <span class="balance__value d-block fw-semibold">$40.000</span>
+          <div
+            class="d-flex align-items-center justify-content-center balance__img">
+            <a class="balance__link" role="button" (click)="onShowBalance()">
+              <img
+                class="w-100"
+                loading="lazy"
+                src="../../../../../../../assets/icons/Open-eye.svg"
+                alt="Open eye icon" />
+            </a>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template #noBalance>
+        <div class="gap-2 d-flex flex-sm-column">
+          <span class="balance__value d-block fw-semibold">$***</span>
+          <div
+            class="d-flex align-items-center justify-content-center balance__img">
+            <a class="balance__link" role="button" (click)="onShowBalance()">
+              <img
+                class="w-100"
+                loading="lazy"
+                src="../../../../../../../assets/icons/Closed-eye.svg"
+                alt="Closed eye icon" />
+            </a>
+          </div>
+        </div>
+      </ng-template>
+      <p class="my-3 balance__title fw-normal d-block">Saldo en EZPay</p>
+    </div>
+
+    <div class="icons">
+      <div
+        class="flex-wrap mx-2 icons__buttons d-flex align-items-center justify-content-between">
+        <div
+          class="gap-2 icons__item d-flex flex-column flex-nowrap align-items-center justify-content-center">
+          <div class="icons__img">
+            <img
+              class="mt-1 icons__icon d-block w-100"
+              loading="lazy"
+              src="../../../../../../../assets/icons/Ingresar-tarjeta.svg"
+              alt="Enter card icon" />
+          </div>
+          <p class="icons__text">Ingresar</p>
+        </div>
+
+        <div class="icons__item">
+          <div class="icons__img">
+            <img
+              class="icons__icon"
+              loading="lazy"
+              src="../../../../../../../assets/icons/Transferir.svg"
+              alt="Enter card icon" />
+          </div>
+          <p class="icons__text">Transferir</p>
+        </div>
+        <div class="icons__item">
+          <div class="icons__img">
+            <img
+              class="icons__icon"
+              loading="lazy"
+              src="../../../../../../../assets/icons/Retirar.svg"
+              alt="Enter card icon" />
+          </div>
+          <p class="icons__text">Retirar</p>
+        </div>
+        <div class="icons__item">
+          <div class="icons__img">
+            <img
+              class="icons__icon"
+              loading="lazy"
+              src="../../../../../../../assets/icons/Invertir.svg"
+              alt="Enter card icon" />
+          </div>
+          <p class="icons__text">Invertir</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="associated">
+      <div class="associated__container">
+        <div class="associated__item">Tarjetas asiociadas</div>
+        <div class="associated__item">
+          <a routerLink="">
+            <img
+              class="associated__icon"
+              loading="lazy"
+              src="../../../../../../../assets/icons/Asociar.svg"
+              alt="" />
+            <p class="associated__text">Asociar una nueva</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

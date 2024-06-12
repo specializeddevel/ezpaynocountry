@@ -1,0 +1,47 @@
+.card{
+    background-color: var(--sColorBlank);
+    border-radius: 25px;
+    border-style: none;
+}
+
+.balance__title{
+    font-size: var(--fontSizeBodyMobileHeading3);
+    line-height: var(--lineHeightBodyMobileHeading3);
+}
+
+.balance__value{
+    font-size: var(--fontSizeHeading1);
+    line-height: var(--lineHeightHeading1);
+}
+.balance__img{
+    min-width: 37px;
+}
+
+
+.balance__link{
+    cursor: pointer;
+    background-color: var(--pColorBackgound);
+    border-radius: 50px;
+    padding: 10px;
+   
+}
+
+
+/* .icons__item{
+    min-width: 72px;
+} */
+.icons__img{
+    min-width: 72px;
+    min-height: 72px;
+    width: 100%;
+    height: 100%;
+    background-color: var(--pColorBackgound);
+    border-radius: 50px;
+    padding: 15px;
+   
+}
+
+.icons__icon{
+   
+}
+
