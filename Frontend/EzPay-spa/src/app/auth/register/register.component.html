@@ -1,40 +1,20 @@
-<div>
-  <section id="form-wrapper">
+<div class="register-container d-flex">
+  <section class="register-img-box col-7">
+    <img src="../../../assets/auth/register.jpg" class="register-img" alt="">
+  </section>
+  <section id="form-wrapper" class="col-5">
+    <img src="../../../assets/logo/Logo.svg" class="EzPay-logo" alt="EzPay logo">
+    <img src="../../../assets/logo/Tipografia.svg" class="EzPay-name" alt="EzPay">
     <form action="#" id="form-register" method="post" novalidate>
-      <h2>Registro</h2>
-      <div class="form-control">
-        <label for="name">Nombre</label>
-        <input type="text" name="name" required id="name" placeholder="Nombre">
-      </div>
-      <div class="form-control">
-        <label for="email">E-mail</label>
-        <input type="email" name="email" required id="email" placeholder="E-mail">
-      </div>
-      <div class="form-control">
-        <label for="password">Contraseña</label>
-        <input type="password" name="password" required id="password" placeholder="Contraseña">
-      </div>
-      <div class="form-control">
-        <label for="phone">Teléfono</label>
-        <input type="text" name="phone" required id="phone" placeholder="Teléfono">
-      </div>
-      <div class="form-control">
-        <label for="dni">DNI</label>
-        <input type="text" name="dni" required id="dni" placeholder="N° Documento">
-      </div>
-      <div class="form-control">
-        <label for="date">Fecha de Nacimiento</label>
-        <input type="date" name="date" required id="date" placeholder="Fecha de Nacimiento">
-      </div>
-      <!-- <div class="form-terms">
-              <div class="terms">
-                <input type="checkbox" name="" id="terms">
-                <label for="terms">Acepto términos y condiciones</label>
-              </div>
-            </div> -->
-      <button type="submit">&nbsp;Registrarse</button>
+      <input type="text" name="name" required id="name" class="form-input" placeholder="Nombre">
+      <input type="email" name="email" required id="email" class="form-input" placeholder="E-mail">
+      <input type="password" name="password" required id="password" class="form-input" placeholder="Contraseña">
+      <input type="text" name="phone" required id="phone" class="form-input" placeholder="Teléfono">
+      <input type="text" name="dni" required id="dni" class="form-input" placeholder="N° Documento">
+      <input type="date" name="date" required id="date" class="form-input" placeholder="Fecha de Nacimiento">
+      <button class="form-button" type="submit">&nbsp;Regístrate</button>
       <div class="form-login">
-        <p>¿Tienes una cuenta?</p><a routerLink="#">Ingresa</a>
+        <p>¿Tienes una cuenta?</p><a routerLink="/login">Ingresa</a>
       </div>
     </form>
   </section>

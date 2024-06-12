@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './layout/home/home.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import InicioComponent from './modules/dashboard/pages/inicio/inicio.component';
 import { UserComponent } from './modules/user/user.component';
@@ -44,7 +45,7 @@ const routes: Routes = [
     ],
   },
   { path: 'register', component: RegisterComponent },
-
+  { path: 'login', component: LoginComponent },
   // Fallback when no prior routes is matched or 404
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
 ];

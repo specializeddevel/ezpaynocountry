@@ -17,7 +17,8 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/card")
-public class CardController {
+public class
+CardController {
 
     @Autowired
     private CardService cardService;
