@@ -1,3 +1,4 @@
+
 package com.ezpay.service;
 
 import com.ezpay.exceptions.UserHasAccountException;
@@ -29,12 +30,13 @@ public class AccountServiceImpl implements AccountService
     }
 
     @Transactional
-    public Account newAccount(AccountCreateDto data)  {
+    public Account newAccount(AccountCreateDto data)  throws UserHasAccountException{
         /*si el usuario no existe */
                userService.findUserById(data.userId()).orElseThrow(() -> new UserNotFoundException(data.userId()));
         /*Si el usuario ya tiene una cuenta creada se dispara una excepcion*/
         if (existByUserId(data.userId())
                 .isPresent()) { throw new UserHasAccountException(data.userId());}
+          //existByUserId(data.userId()).ifPresentOrElse(mensaje -> new UserHasAccountException(mensaje.getUserId()),()-> System.out.println("presente"));
 //        String fecha = usuario.get().getBirthDate().toString();
 //        // Definir un formateador para el formato de entrada
 //        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
