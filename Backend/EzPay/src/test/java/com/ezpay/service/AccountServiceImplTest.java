@@ -29,9 +29,9 @@ public class AccountServiceImplTest {
 
     @MockBean
     private AccountRepository accountRepository;
-
-    @Autowired
     private UserService userService;
+
+
 
     @Autowired
     private AccountServiceImpl accountService;
@@ -47,8 +47,8 @@ public class AccountServiceImplTest {
     @Transactional
     public void testNewAccount_UserNotFound() throws Exception {
         // Simula que el usuario no existe
-        when(userService.findUserById(accountCreateDto.userId())).thenReturn(Optional.empty());
-
+        //when(userService.findUserById(accountCreateDto.userId())).thenReturn(Optional.empty());
+        when(accountRepository.findByUserId(accountCreateDto.userId())).thenThrow(new UserNotFoundException(accountCreateDto.userId()));
         // Verifica que se lance la excepción correcta
         assertThrows(UserNotFoundException.class, () -> {
             accountService.newAccount(accountCreateDto);
@@ -77,10 +77,30 @@ public class AccountServiceImplTest {
 
     @Test
     @Transactional
+    @DisplayName("Should pass if user has an account alredy created.")
+    public void testNewAccount_UserDontHasAccount() {
+        // Simula que el usuario no tiene una cuenta
+        when(accountRepository.findByUserId(accountCreateDto.userId())).thenReturn(Optional.empty());
+
+        // Verifica que no se lance una excepcion
+
+        try {
+            accountService.newAccount(accountCreateDto);
+        } catch (UserHasAccountException e) {
+            fail("Should throw UserHasAccountException");
+        }
+        verify(accountRepository, times(1)).save(any(Account.class));
+    }
+    // Verifica que el método de repositorio no se haya llamado
+
+
+
+    @Test
+    @Transactional
     @DisplayName("Should pass if the account was created.")
     public void testNewAccount_Success() throws Exception {
         // Simula que el usuario existe y no tiene una cuenta
-        when(userService.findUserById(accountCreateDto.userId())).thenReturn(Optional.of(new User()));
+        //when(userService.findUserById(accountCreateDto.userId())).thenReturn(Optional.of(new User()));
         when(accountRepository.findByUserId(accountCreateDto.userId())).thenReturn(Optional.empty());
 
         // Verifica que se guarde una cuenta nueva
