@@ -20,13 +20,9 @@ const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     children: [
+   
       {
         path: '',
-        redirectTo: 'inicio',
-        pathMatch: 'full'
-      },
-      {
-        path: 'inicio',
         component: InicioComponent,
         // loadComponent: () =>
         //   import('./modules/dashboard/pages/inicio/inicio.component'),

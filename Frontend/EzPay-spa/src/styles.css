@@ -36,7 +36,9 @@
 
     /* text headings mobile */
     --fontSizeMobileHeading2:1.25rem ;
+    --fontSizeMobileHeading4:1rem  ;
     --lineHeightMobileHeading2:1.75rem;
+    --lineHeightMobileHeading4:1.25rem ;
 
     /* text body */
     --fontSizeBody1:28px;

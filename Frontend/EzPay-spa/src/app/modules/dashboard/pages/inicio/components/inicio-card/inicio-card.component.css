@@ -42,6 +42,26 @@
 }
 
 .icons__icon{
-   
+   object-fit: cover;
 }
 
+.icons__text{
+    font-size: var(--fontSizeBodyMobileHeading3);
+    line-height: var(--lineHeightBodyMobileHeading3);
+}
+
+.associated__item{
+    
+}
+.associated__text{
+    font-size: var(--fontSizeMobileHeading4);
+    line-height: var(--lineHeightMobileHeading4);
+    color: var(--pColorText);
+}
+
+.associated__text-color{
+    color: var(--pColorPrimary);
+}
+.associated__icon{
+    padding-top: 5px;
+}
