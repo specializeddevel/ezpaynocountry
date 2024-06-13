@@ -11,7 +11,6 @@ import java.time.Period;
 import java.util.Date;
 import java.util.function.Consumer;
 
-@Component
 public class AccountUtilities {
 
     private static final SecureRandom secureRandom = new SecureRandom();
