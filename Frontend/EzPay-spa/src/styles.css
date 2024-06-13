@@ -51,7 +51,9 @@
     
     /* text body headings mobile */
     --fontSizeBodyMobileHeading2:1.125rem;
+    --fontSizeBodyMobileHeading3:.875rem;
     --lineHeightBodyMobileHeading2:1.25rem;
+    --lineHeightBodyMobileHeading3:1.25rem;
 
     /* text btn-link */
     --fontSizeBtnLink1:18px;
